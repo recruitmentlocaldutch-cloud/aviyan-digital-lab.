@@ -2,689 +2,1201 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVIYAN // DIGITAL LAB</title>
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>AVIYAN // CORE</title>
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html,body{
-  width:100%;
-  min-height:100%;
-  background:#02040a;
-  color:#dffcff;
-  font-family:"Courier New",monospace;
-  overflow-x:hidden;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#00030a;
+    font-family:"Courier New",monospace;
+    color:#dffcff;
 }
-
-/* BACKGROUND */
 
 body{
-  background:
-    radial-gradient(circle at 20% 20%,rgba(0,255,255,.12),transparent 30%),
-    radial-gradient(circle at 80% 70%,rgba(100,0,255,.13),transparent 35%),
-    #02040a;
+    position:relative;
 }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.35;
-  background-image:
-    linear-gradient(rgba(0,255,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,255,255,.07) 1px,transparent 1px);
-  background-size:45px 45px;
-  animation:gridMove 12s linear infinite;
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.bg{
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(0,220,255,.12),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(80,0,255,.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(0,255,220,.08),
+            transparent 25%
+        ),
+        #00030a;
+}
+
+/* GRID */
+
+.grid{
+    position:absolute;
+    inset:-100px;
+
+    background-image:
+        linear-gradient(
+            rgba(0,220,255,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,220,255,.055) 1px,
+            transparent 1px
+        );
+
+    background-size:55px 55px;
+
+    transform:
+        perspective(500px)
+        rotateX(62deg)
+        scale(1.5);
+
+    transform-origin:center bottom;
+
+    animation:gridMove 5s linear infinite;
 }
 
 @keyframes gridMove{
-  from{transform:translateY(0)}
-  to{transform:translateY(45px)}
+
+    from{
+        background-position:0 0;
+    }
+
+    to{
+        background-position:0 55px;
+    }
+
 }
 
-/* SCANLINE */
+/* =====================================================
+   SCANLINE
+===================================================== */
 
-.scanline{
-  position:fixed;
-  left:0;
-  width:100%;
-  height:2px;
-  background:rgba(0,255,255,.45);
-  box-shadow:0 0 20px #00ffff;
-  z-index:20;
-  animation:scan 5s linear infinite;
-  pointer-events:none;
+.scan{
+    position:absolute;
+
+    width:100%;
+    height:3px;
+
+    background:#00ffff;
+
+    box-shadow:
+        0 0 10px #00ffff,
+        0 0 35px #00ffff;
+
+    opacity:.5;
+
+    animation:scan 3s linear infinite;
+
+    z-index:20;
 }
 
 @keyframes scan{
-  0%{top:-5%}
-  100%{top:105%}
+
+    0%{
+        top:-5%;
+    }
+
+    100%{
+        top:105%;
+    }
+
 }
 
-/* PARTICLES */
+/* =====================================================
+   PARTICLES
+===================================================== */
 
-.particle{
-  position:fixed;
-  width:3px;
-  height:3px;
-  background:#00ffff;
-  border-radius:50%;
-  box-shadow:0 0 12px #00ffff;
-  animation:float 8s linear infinite;
-  pointer-events:none;
+#particles{
+    position:absolute;
+    inset:0;
+    z-index:2;
 }
 
-.p1{left:8%;top:80%;animation-delay:0s}
-.p2{left:18%;top:20%;animation-delay:2s}
-.p3{left:36%;top:70%;animation-delay:1s}
-.p4{left:52%;top:30%;animation-delay:3s}
-.p5{left:73%;top:75%;animation-delay:1.5s}
-.p6{left:90%;top:25%;animation-delay:4s}
-.p7{left:65%;top:15%;animation-delay:2.5s}
-.p8{left:30%;top:45%;animation-delay:5s}
+/* =====================================================
+   MAIN
+===================================================== */
 
-@keyframes float{
-  0%{transform:translateY(40px);opacity:0}
-  20%{opacity:1}
-  80%{opacity:1}
-  100%{transform:translateY(-160px);opacity:0}
+.interface{
+    position:absolute;
+
+    inset:0;
+
+    z-index:5;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding:
+        25px
+        25px
+        30px;
+
 }
 
-/* MAIN */
+/* =====================================================
+   TOP BAR
+===================================================== */
 
-.container{
-  position:relative;
-  z-index:2;
-  width:min(1100px,92%);
-  margin:auto;
-  padding:35px 0 70px;
+.top{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    color:#5a8296;
+
 }
 
-/* HEADER */
+.top .online{
 
-.header{
-  border:1px solid rgba(0,255,255,.35);
-  background:rgba(3,10,20,.72);
-  backdrop-filter:blur(12px);
-  padding:30px;
-  box-shadow:
-    0 0 35px rgba(0,255,255,.08),
-    inset 0 0 30px rgba(0,255,255,.025);
-  position:relative;
-  overflow:hidden;
+    color:#00ffae;
+
+    text-shadow:
+        0 0 10px #00ffae;
+
 }
 
-.header::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:1px;
-  background:#00ffff;
-  box-shadow:0 0 20px #00ffff;
-  animation:glowLine 4s linear infinite;
+/* =====================================================
+   TITLE
+===================================================== */
+
+.brand{
+
+    margin-top:65px;
+
+    text-align:center;
+
+    z-index:8;
+
 }
 
-@keyframes glowLine{
-  0%{left:-100%}
-  100%{left:100%}
+.brand small{
+
+    color:#00d9ff;
+
+    letter-spacing:6px;
+
+    font-size:10px;
+
 }
 
-.system{
-  color:#00ffff;
-  font-size:12px;
-  letter-spacing:3px;
-  margin-bottom:15px;
-}
+.brand h1{
 
-.logo{
-  font-family:Arial,sans-serif;
-  font-size:clamp(42px,10vw,100px);
-  font-weight:900;
-  letter-spacing:12px;
-  color:white;
-  text-shadow:
-    0 0 8px #00ffff,
-    0 0 25px rgba(0,255,255,.6);
-  animation:flicker 5s infinite;
+    margin-top:8px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:
+        clamp(48px,15vw,100px);
+
+    letter-spacing:
+        clamp(8px,3vw,20px);
+
+    font-weight:900;
+
+    color:white;
+
+    text-shadow:
+
+        0 0 8px #fff,
+
+        0 0 20px #00eaff,
+
+        0 0 50px #008cff,
+
+        0 0 90px #6a00ff;
+
+    animation:
+        flicker 4s infinite;
+
 }
 
 @keyframes flicker{
-  0%,96%,100%{opacity:1}
-  97%{opacity:.65}
-  98%{opacity:1}
+
+    0%,95%,100%{
+        opacity:1;
+    }
+
+    96%{
+        opacity:.45;
+    }
+
+    97%{
+        opacity:1;
+    }
+
 }
 
-.subtitle{
-  margin-top:8px;
-  color:#788b9e;
-  letter-spacing:5px;
-  font-size:13px;
+/* =====================================================
+   DIGITAL CORE
+===================================================== */
+
+.core{
+
+    position:absolute;
+
+    top:39%;
+
+    left:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:270px;
+
+    height:270px;
+
 }
 
-/* STATUS */
+.ring{
 
-.status-grid{
-  margin-top:25px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+    position:absolute;
+
+    inset:0;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(0,230,255,.55);
+
+    box-shadow:
+        0 0 30px rgba(0,220,255,.15);
+
 }
 
-.status{
-  border:1px solid rgba(0,255,255,.18);
-  padding:15px;
-  background:rgba(0,255,255,.025);
+.ring:nth-child(1){
+
+    animation:
+        rotate 7s linear infinite;
+
 }
 
-.status-label{
-  color:#607687;
-  font-size:10px;
-  letter-spacing:2px;
+.ring:nth-child(2){
+
+    inset:18px;
+
+    border-color:
+        rgba(120,60,255,.65);
+
+    animation:
+        rotateReverse 5s linear infinite;
+
 }
 
-.status-value{
-  margin-top:7px;
-  color:#00ff9d;
-  font-size:13px;
+.ring:nth-child(3){
+
+    inset:38px;
+
+    border:
+        2px dashed
+        rgba(0,255,220,.45);
+
+    animation:
+        rotate 3s linear infinite;
+
 }
 
-.dot{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#00ff9d;
-  box-shadow:0 0 12px #00ff9d;
-  margin-right:6px;
+.ring::before,
+.ring::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#00ffff;
+
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 35px #00ffff;
+
 }
 
-/* TERMINAL */
+.ring::before{
 
-.section{
-  margin-top:25px;
-  border:1px solid rgba(120,150,255,.18);
-  background:rgba(3,8,18,.78);
-  padding:25px;
-  box-shadow:0 0 30px rgba(0,100,255,.06);
+    top:-4px;
+
+    left:50%;
+
 }
 
-.section-title{
-  color:#00ffff;
-  font-size:12px;
-  letter-spacing:3px;
-  margin-bottom:20px;
+.ring::after{
+
+    bottom:-4px;
+
+    right:50%;
+
 }
+
+@keyframes rotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+@keyframes rotateReverse{
+
+    from{
+        transform:rotate(360deg);
+    }
+
+    to{
+        transform:rotate(0deg);
+    }
+
+}
+
+.core-center{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff,
+            #00ffff 15%,
+            #0077ff 45%,
+            #08001c 75%
+        );
+
+    box-shadow:
+
+        0 0 20px #00ffff,
+
+        0 0 60px #008cff,
+
+        0 0 110px #5d00ff;
+
+    animation:
+        pulse 1.5s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            scale(1.12);
+    }
+
+}
+
+/* =====================================================
+   CODE STREAM
+===================================================== */
+
+.code-stream{
+
+    position:absolute;
+
+    top:28%;
+
+    left:0;
+
+    width:100%;
+
+    height:45%;
+
+    overflow:hidden;
+
+    opacity:.5;
+
+    z-index:-1;
+
+}
+
+.code-column{
+
+    position:absolute;
+
+    top:-100%;
+
+    white-space:pre;
+
+    font-size:10px;
+
+    line-height:18px;
+
+    color:#00eaff;
+
+    text-shadow:
+        0 0 8px #00eaff;
+
+    animation:
+        fall linear infinite;
+
+}
+
+@keyframes fall{
+
+    to{
+        transform:
+            translateY(250vh);
+    }
+
+}
+
+/* =====================================================
+   TERMINAL
+===================================================== */
 
 .terminal{
-  min-height:230px;
-  background:#010207;
-  border:1px solid rgba(0,255,255,.16);
-  padding:20px;
-  color:#89ffdb;
-  line-height:1.8;
-  font-size:13px;
-  overflow:hidden;
+
+    position:absolute;
+
+    left:25px;
+
+    right:25px;
+
+    bottom:125px;
+
+    height:205px;
+
+    border:
+        1px solid
+        rgba(0,230,255,.25);
+
+    background:
+        rgba(0,5,14,.72);
+
+    backdrop-filter:
+        blur(8px);
+
+    box-shadow:
+        0 0 35px
+        rgba(0,200,255,.08);
+
+    padding:18px;
+
+    overflow:hidden;
+
 }
 
-.prompt{
-  color:#00ffff;
+.terminal-head{
+
+    color:#55798c;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    margin-bottom:12px;
+
+}
+
+#terminalText{
+
+    color:#8fffe8;
+
+    font-size:11px;
+
+    line-height:1.7;
+
+    white-space:pre-wrap;
+
 }
 
 .cursor{
-  display:inline-block;
-  width:8px;
-  height:15px;
-  background:#00ffff;
-  box-shadow:0 0 10px #00ffff;
-  animation:blink 1s infinite;
-  vertical-align:middle;
+
+    display:inline-block;
+
+    width:7px;
+
+    height:12px;
+
+    background:#00ffff;
+
+    box-shadow:
+        0 0 10px #00ffff;
+
+    animation:
+        blink .8s infinite;
+
 }
 
 @keyframes blink{
-  50%{opacity:0}
+
+    50%{
+        opacity:0;
+    }
+
 }
 
-/* CODE */
+/* =====================================================
+   STATUS
+===================================================== */
 
-.code-window{
-  background:#010207;
-  border:1px solid rgba(0,255,255,.14);
-  padding:18px;
-  overflow:hidden;
-  position:relative;
+.status{
+
+    position:absolute;
+
+    left:25px;
+    right:25px;
+
+    bottom:70px;
+
+    display:flex;
+
+    justify-content:
+        space-between;
+
+    font-size:8px;
+
+    letter-spacing:1px;
+
+    color:#557486;
+
 }
 
-.code{
-  color:#a6b8c9;
-  font-size:12px;
-  line-height:1.7;
-  white-space:pre;
-  animation:codeSlide 18s linear infinite;
+.status span{
+
+    color:#00ffae;
+
 }
 
-@keyframes codeSlide{
-  0%{transform:translateY(0)}
-  100%{transform:translateY(-120px)}
+/* =====================================================
+   FINAL
+===================================================== */
+
+.final{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,240,255,.12),
+            rgba(0,0,0,.97) 55%
+        );
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:50;
+
+    transition:
+        opacity 1s ease;
+
 }
 
-.keyword{color:#ff61d8}
-.string{color:#8aff80}
-.function{color:#00ffff}
-.number{color:#ffd166}
-.comment{color:#465563}
+.final.show{
 
-/* PROGRESS */
+    opacity:1;
 
-.progress-box{
-  margin-top:20px;
 }
 
-.progress-info{
-  display:flex;
-  justify-content:space-between;
-  color:#6e8193;
-  font-size:11px;
-  margin-bottom:8px;
+.final h2{
+
+    font-family:Arial,sans-serif;
+
+    font-size:
+        clamp(58px,17vw,120px);
+
+    letter-spacing:
+        clamp(8px,4vw,25px);
+
+    color:white;
+
+    text-shadow:
+
+        0 0 10px #fff,
+
+        0 0 30px #00ffff,
+
+        0 0 70px #008cff,
+
+        0 0 120px #7000ff;
+
 }
 
-.progress{
-  height:5px;
-  background:#0b111a;
-  overflow:hidden;
-}
+.final p{
 
-.progress-bar{
-  height:100%;
-  width:0;
-  background:#00ffff;
-  box-shadow:0 0 15px #00ffff;
-  animation:load 4s ease forwards;
-}
+    margin-top:18px;
 
-@keyframes load{
-  to{width:100%}
-}
-
-/* PROJECTS */
-
-.projects{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.project{
-  border:1px solid rgba(0,255,255,.15);
-  padding:20px;
-  min-height:150px;
-  transition:.3s;
-  background:rgba(0,255,255,.015);
-}
-
-.project:hover{
-  transform:translateY(-5px);
-  border-color:rgba(0,255,255,.5);
-  box-shadow:0 0 25px rgba(0,255,255,.12);
-}
-
-.project-number{
-  color:#405465;
-  font-size:11px;
-}
-
-.project h3{
-  color:#fff;
-  margin:15px 0 8px;
-  font-family:Arial,sans-serif;
-}
-
-.project p{
-  color:#708394;
-  font-size:11px;
-  line-height:1.7;
-}
-
-/* FOOTER */
-
-.footer{
-  text-align:center;
-  margin-top:30px;
-  color:#506170;
-  font-size:10px;
-  letter-spacing:3px;
-}
-
-.footer strong{
-  color:#00ffff;
-}
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-  .container{
-    width:94%;
-    padding-top:18px;
-  }
-
-  .header{
-    padding:20px;
-  }
-
-  .logo{
-    font-size:42px;
-    letter-spacing:6px;
-  }
-
-  .subtitle{
-    font-size:9px;
-    letter-spacing:3px;
-  }
-
-  .status-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .projects{
-    grid-template-columns:1fr;
-  }
-
-  .section{
-    padding:18px;
-  }
-
-  .terminal{
     font-size:11px;
-  }
 
-  .code{
-    font-size:9px;
-  }
+    letter-spacing:5px;
+
+    color:#7eeeff;
+
 }
+
+/* =====================================================
+   GLITCH
+===================================================== */
+
+.glitch{
+
+    animation:
+        glitch .25s steps(2);
+
+}
+
+@keyframes glitch{
+
+    0%{
+        transform:translate(0);
+    }
+
+    25%{
+        transform:translate(-8px,3px);
+    }
+
+    50%{
+        transform:translate(8px,-3px);
+    }
+
+    75%{
+        transform:translate(-4px,-2px);
+    }
+
+    100%{
+        transform:translate(0);
+    }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .interface{
+        padding:18px;
+    }
+
+    .brand{
+        margin-top:50px;
+    }
+
+    .core{
+        top:38%;
+        width:245px;
+        height:245px;
+    }
+
+    .terminal{
+        left:18px;
+        right:18px;
+        bottom:105px;
+        height:185px;
+    }
+
+    .status{
+        left:18px;
+        right:18px;
+        bottom:48px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="scanline"></div>
+<div class="bg"></div>
 
-<div class="particle p1"></div>
-<div class="particle p2"></div>
-<div class="particle p3"></div>
-<div class="particle p4"></div>
-<div class="particle p5"></div>
-<div class="particle p6"></div>
-<div class="particle p7"></div>
-<div class="particle p8"></div>
+<div class="grid"></div>
 
-<main class="container">
+<div class="scan"></div>
 
-  <header class="header">
+<canvas id="particles"></canvas>
 
-    <div class="system">
-      SYSTEM // DIGITAL LAB // 01
-    </div>
+<div class="code-stream" id="codeStream"></div>
 
-    <div class="logo">
-      AVIYAN
-    </div>
 
-    <div class="subtitle">
-      CODE • CREATE • DEPLOY
-    </div>
+<div class="interface">
 
-    <div class="status-grid">
+    <div class="top">
 
-      <div class="status">
-        <div class="status-label">SYSTEM</div>
-        <div class="status-value">
-          <span class="dot"></span>ONLINE
+        <div>
+            AV // CORE-01
         </div>
-      </div>
 
-      <div class="status">
-        <div class="status-label">CODE ENGINE</div>
-        <div class="status-value">
-          <span class="dot"></span>ACTIVE
+        <div class="online">
+            ● SYSTEM ONLINE
         </div>
-      </div>
 
-      <div class="status">
-        <div class="status-label">GITHUB</div>
-        <div class="status-value">
-          <span class="dot"></span>CONNECTED
+    </div>
+
+
+    <div class="brand">
+
+        <small>
+            DIGITAL DEVELOPMENT ENVIRONMENT
+        </small>
+
+        <h1>
+            AVIYAN
+        </h1>
+
+    </div>
+
+
+    <div class="core">
+
+        <div class="ring"></div>
+
+        <div class="ring"></div>
+
+        <div class="ring"></div>
+
+        <div class="core-center"></div>
+
+    </div>
+
+
+    <div class="terminal">
+
+        <div class="terminal-head">
+            TERMINAL // LIVE DEVELOPMENT SESSION
         </div>
-      </div>
 
-      <div class="status">
-        <div class="status-label">DEPLOYMENT</div>
-        <div class="status-value">
-          <span class="dot"></span>LIVE
+        <div id="terminalText"></div>
+
+        <span class="cursor"></span>
+
+    </div>
+
+
+    <div class="status">
+
+        <div>
+            CPU <span>ONLINE</span>
         </div>
-      </div>
+
+        <div>
+            NETWORK <span>LINKED</span>
+        </div>
+
+        <div>
+            CODE <span>ACTIVE</span>
+        </div>
+
+        <div>
+            BUILD <span>100%</span>
+        </div>
 
     </div>
 
-  </header>
+</div>
 
 
-  <section class="section">
+<div class="final" id="final">
 
-    <div class="section-title">
-      // TERMINAL SESSION
-    </div>
+    <h2>AVIYAN</h2>
 
-    <div class="terminal" id="terminal"></div>
+    <p>
+        DEVELOPER // SYSTEM ONLINE
+    </p>
 
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-title">
-      // SOURCE CODE STREAM
-    </div>
-
-    <div class="code-window">
-
-<pre class="code">
-<span class="comment">// AVIYAN DIGITAL LAB</span>
-
-<span class="keyword">const</span> developer = <span class="string">"AVIYAN"</span>;
-
-<span class="keyword">function</span> <span class="function">buildFuture</span>() {
-
-    <span class="keyword">const</span> ideas = [
-        <span class="string">"innovation"</span>,
-        <span class="string">"technology"</span>,
-        <span class="string">"creativity"</span>
-    ];
-
-    <span class="keyword">return</span> ideas
-        .map(project =&gt; <span class="string">"BUILD_"</span> + project)
-        .join(<span class="string">" // "</span>);
-}
-
-<span class="keyword">const</span> system = {
-    developer: developer,
-    status: <span class="string">"ONLINE"</span>,
-    github: <span class="string">"CONNECTED"</span>,
-    deployment: <span class="string">"LIVE"</span>,
-    mode: <span class="string">"BUILD"</span>
-};
-
-console.log(system);
-
-<span class="comment">// compile → test → deploy</span>
-
-<span class="keyword">async function</span> <span class="function">deployProject</span>() {
-
-    <span class="keyword">await</span> connectToGitHub();
-
-    <span class="keyword">await</span> compileSource();
-
-    <span class="keyword">await</span> runTests();
-
-    <span class="keyword">return</span> <span class="string">"DEPLOYMENT SUCCESSFUL"</span>;
-}
-</pre>
-
-    </div>
-
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-title">
-      // DEPLOYMENT PROCESS
-    </div>
-
-    <div class="progress-box">
-
-      <div class="progress-info">
-        <span>BUILD PROGRESS</span>
-        <span id="percent">0%</span>
-      </div>
-
-      <div class="progress">
-        <div class="progress-bar"></div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-title">
-      // PROJECT MATRIX
-    </div>
-
-    <div class="projects">
-
-      <div class="project">
-        <div class="project-number">PROJECT_01</div>
-        <h3>WEB SYSTEMS</h3>
-        <p>
-          Interactive digital experiences engineered
-          for modern browsers.
-        </p>
-      </div>
-
-      <div class="project">
-        <div class="project-number">PROJECT_02</div>
-        <h3>UI ENGINE</h3>
-        <p>
-          Futuristic interfaces combining motion,
-          code and visual technology.
-        </p>
-      </div>
-
-      <div class="project">
-        <div class="project-number">PROJECT_03</div>
-        <h3>EXPERIMENTAL LAB</h3>
-        <p>
-          Testing new ideas, systems and
-          experimental digital concepts.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <div class="footer">
-    <strong>AVIYAN</strong> // DIGITAL LAB
-    <br><br>
-    SYSTEM STATUS: OPERATIONAL
-  </div>
-
-</main>
+</div>
 
 
 <script>
 
-/* TERMINAL ANIMATION */
+/* =====================================================
+   CODE RAIN
+===================================================== */
 
-const terminal = document.getElementById("terminal");
+const codeStream =
+    document.getElementById("codeStream");
 
-const lines = [
-  "> initializing developer environment...",
-  "> loading source code...",
-  "> connecting to GitHub...",
-  "> repository connection established ✓",
-  "> compiling modules...",
-  "> running system checks...",
-  "> all systems operational ✓",
-  "> preparing deployment...",
-  "> deployment successful ✓",
-  "> AVIYAN DIGITAL LAB // ONLINE"
+const snippets = [
+
+`const developer = "AVIYAN";
+async function buildFuture(){
+await compile();
+return deploy();
+}`,
+
+`git status
+git add .
+git commit -m "build core"
+git push origin main`,
+
+`function create(){
+const idea = new System();
+idea.compile();
+idea.deploy();
+}`,
+
+`01001001 01010110
+01001001 01011001
+01000001 01001110`,
+
+`<system>
+<core>ONLINE</core>
+<code>ACTIVE</code>
+<network>LINKED</network>
+</system>`,
+
+`const system = {
+status:"ONLINE",
+mode:"DEVELOPMENT",
+engine:"ACTIVE"
+};`
+
 ];
 
-let lineIndex = 0;
-let charIndex = 0;
+for(let i=0;i<12;i++){
 
-function typeLine(){
+    const col =
+        document.createElement("div");
 
-  if(lineIndex >= lines.length){
-    terminal.innerHTML +=
-      '<br><span class="prompt">$</span> ready <span class="cursor"></span>';
-    return;
-  }
+    col.className="code-column";
 
-  if(charIndex < lines[lineIndex].length){
+    col.style.left =
+        (Math.random()*100)+"%";
 
-    terminal.innerHTML +=
-      lines[lineIndex][charIndex];
+    col.style.animationDuration =
+        (7+Math.random()*10)+"s";
 
-    charIndex++;
+    col.style.animationDelay =
+        (-Math.random()*10)+"s";
 
-    setTimeout(typeLine,25);
+    col.textContent =
+        snippets[
+            Math.floor(
+                Math.random()*snippets.length
+            )
+        ];
 
-  }else{
+    codeStream.appendChild(col);
 
-    terminal.innerHTML += "<br>";
-
-    lineIndex++;
-    charIndex=0;
-
-    setTimeout(typeLine,350);
-  }
 }
 
-typeLine();
+
+/* =====================================================
+   PARTICLE ENGINE
+===================================================== */
+
+const canvas =
+    document.getElementById("particles");
+
+const ctx =
+    canvas.getContext("2d");
+
+function resize(){
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+resize();
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+const dots=[];
+
+for(let i=0;i<100;i++){
+
+    dots.push({
+
+        x:Math.random()*innerWidth,
+
+        y:Math.random()*innerHeight,
+
+        vx:(Math.random()-.5)*.35,
+
+        vy:(Math.random()-.5)*.35,
+
+        r:Math.random()*1.7+.4
+
+    });
+
+}
+
+function particleLoop(){
+
+    ctx.clearRect(
+        0,0,
+        canvas.width,
+        canvas.height
+    );
+
+    dots.forEach((p,i)=>{
+
+        p.x+=p.vx;
+        p.y+=p.vy;
+
+        if(p.x<0)p.x=innerWidth;
+        if(p.x>innerWidth)p.x=0;
+
+        if(p.y<0)p.y=innerHeight;
+        if(p.y>innerHeight)p.y=0;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.r,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle =
+            "rgba(0,230,255,.75)";
+
+        ctx.fill();
+
+        for(let j=i+1;j<dots.length;j++){
+
+            const q=dots[j];
+
+            const dx=p.x-q.x;
+            const dy=p.y-q.y;
+
+            const dist =
+                Math.sqrt(dx*dx+dy*dy);
+
+            if(dist<110){
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    p.x,p.y
+                );
+
+                ctx.lineTo(
+                    q.x,q.y
+                );
+
+                ctx.strokeStyle =
+                    `rgba(0,180,255,${(
+                        1-dist/110
+                    )*.12})`;
+
+                ctx.stroke();
+
+            }
+
+        }
+
+    });
+
+    requestAnimationFrame(
+        particleLoop
+    );
+
+}
+
+particleLoop();
 
 
-/* BUILD PERCENTAGE */
+/* =====================================================
+   TERMINAL TYPING
+===================================================== */
 
-let percent = 0;
+const terminal =
+    document.getElementById(
+        "terminalText"
+    );
 
-const percentElement =
-  document.getElementById("percent");
+const commands=[
 
-const counter = setInterval(()=>{
+"> initializing core...",
+"> loading developer environment...",
+"> detecting source code...",
+"> source code detected ✓",
+"> connecting to development engine...",
+"> connection established ✓",
+"> compiling modules...",
+"> running system diagnostics...",
+"> all systems operational ✓",
+"> preparing deployment...",
+"> build completed ✓",
+"> AVIYAN // CORE ONLINE"
 
-  percent++;
+];
 
-  percentElement.textContent =
-    percent + "%";
+let commandIndex=0;
 
-  if(percent >= 100){
-    clearInterval(counter);
-  }
+let characterIndex=0;
 
-},40);
+function typeTerminal(){
+
+    if(commandIndex>=commands.length){
+
+        setTimeout(()=>{
+
+            terminal.innerHTML="";
+
+            commandIndex=0;
+
+            characterIndex=0;
+
+            typeTerminal();
+
+        },2500);
+
+        return;
+
+    }
+
+    const current =
+        commands[commandIndex];
+
+    if(characterIndex<
+       current.length){
+
+        terminal.innerHTML +=
+            current[characterIndex];
+
+        characterIndex++;
+
+        setTimeout(
+            typeTerminal,
+            18
+        );
+
+    }else{
+
+        terminal.innerHTML +=
+            "<br>";
+
+        commandIndex++;
+
+        characterIndex=0;
+
+        setTimeout(
+            typeTerminal,
+            250
+        );
+
+    }
+
+}
+
+typeTerminal();
+
+
+/* =====================================================
+   CINEMATIC FINAL REVEAL
+===================================================== */
+
+setTimeout(()=>{
+
+    document.body.classList.add(
+        "glitch"
+    );
+
+},11000);
+
+setTimeout(()=>{
+
+    document
+        .getElementById("final")
+        .classList.add("show");
+
+},12000);
+
+
+/* RESTART CINEMATIC */
+
+setTimeout(()=>{
+
+    document
+        .getElementById("final")
+        .classList.remove("show");
+
+    document.body.classList.remove(
+        "glitch"
+    );
+
+},17000);
 
 </script>
 
