@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVIYAN // DIGITAL LAB</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  background:#02040a;
+  color:#dffcff;
+  font-family:"Courier New",monospace;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body{
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,255,255,.12),transparent 30%),
+    radial-gradient(circle at 80% 70%,rgba(100,0,255,.13),transparent 35%),
+    #02040a;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.35;
+  background-image:
+    linear-gradient(rgba(0,255,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,255,.07) 1px,transparent 1px);
+  background-size:45px 45px;
+  animation:gridMove 12s linear infinite;
+}
+
+@keyframes gridMove{
+  from{transform:translateY(0)}
+  to{transform:translateY(45px)}
+}
+
+/* SCANLINE */
+
+.scanline{
+  position:fixed;
+  left:0;
+  width:100%;
+  height:2px;
+  background:rgba(0,255,255,.45);
+  box-shadow:0 0 20px #00ffff;
+  z-index:20;
+  animation:scan 5s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes scan{
+  0%{top:-5%}
+  100%{top:105%}
+}
+
+/* PARTICLES */
+
+.particle{
+  position:fixed;
+  width:3px;
+  height:3px;
+  background:#00ffff;
+  border-radius:50%;
+  box-shadow:0 0 12px #00ffff;
+  animation:float 8s linear infinite;
+  pointer-events:none;
+}
+
+.p1{left:8%;top:80%;animation-delay:0s}
+.p2{left:18%;top:20%;animation-delay:2s}
+.p3{left:36%;top:70%;animation-delay:1s}
+.p4{left:52%;top:30%;animation-delay:3s}
+.p5{left:73%;top:75%;animation-delay:1.5s}
+.p6{left:90%;top:25%;animation-delay:4s}
+.p7{left:65%;top:15%;animation-delay:2.5s}
+.p8{left:30%;top:45%;animation-delay:5s}
+
+@keyframes float{
+  0%{transform:translateY(40px);opacity:0}
+  20%{opacity:1}
+  80%{opacity:1}
+  100%{transform:translateY(-160px);opacity:0}
+}
+
+/* MAIN */
+
+.container{
+  position:relative;
+  z-index:2;
+  width:min(1100px,92%);
+  margin:auto;
+  padding:35px 0 70px;
+}
+
+/* HEADER */
+
+.header{
+  border:1px solid rgba(0,255,255,.35);
+  background:rgba(3,10,20,.72);
+  backdrop-filter:blur(12px);
+  padding:30px;
+  box-shadow:
+    0 0 35px rgba(0,255,255,.08),
+    inset 0 0 30px rgba(0,255,255,.025);
+  position:relative;
+  overflow:hidden;
+}
+
+.header::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:1px;
+  background:#00ffff;
+  box-shadow:0 0 20px #00ffff;
+  animation:glowLine 4s linear infinite;
+}
+
+@keyframes glowLine{
+  0%{left:-100%}
+  100%{left:100%}
+}
+
+.system{
+  color:#00ffff;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-bottom:15px;
+}
+
+.logo{
+  font-family:Arial,sans-serif;
+  font-size:clamp(42px,10vw,100px);
+  font-weight:900;
+  letter-spacing:12px;
+  color:white;
+  text-shadow:
+    0 0 8px #00ffff,
+    0 0 25px rgba(0,255,255,.6);
+  animation:flicker 5s infinite;
+}
+
+@keyframes flicker{
+  0%,96%,100%{opacity:1}
+  97%{opacity:.65}
+  98%{opacity:1}
+}
+
+.subtitle{
+  margin-top:8px;
+  color:#788b9e;
+  letter-spacing:5px;
+  font-size:13px;
+}
+
+/* STATUS */
+
+.status-grid{
+  margin-top:25px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.status{
+  border:1px solid rgba(0,255,255,.18);
+  padding:15px;
+  background:rgba(0,255,255,.025);
+}
+
+.status-label{
+  color:#607687;
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+.status-value{
+  margin-top:7px;
+  color:#00ff9d;
+  font-size:13px;
+}
+
+.dot{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#00ff9d;
+  box-shadow:0 0 12px #00ff9d;
+  margin-right:6px;
+}
+
+/* TERMINAL */
+
+.section{
+  margin-top:25px;
+  border:1px solid rgba(120,150,255,.18);
+  background:rgba(3,8,18,.78);
+  padding:25px;
+  box-shadow:0 0 30px rgba(0,100,255,.06);
+}
+
+.section-title{
+  color:#00ffff;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-bottom:20px;
+}
+
+.terminal{
+  min-height:230px;
+  background:#010207;
+  border:1px solid rgba(0,255,255,.16);
+  padding:20px;
+  color:#89ffdb;
+  line-height:1.8;
+  font-size:13px;
+  overflow:hidden;
+}
+
+.prompt{
+  color:#00ffff;
+}
+
+.cursor{
+  display:inline-block;
+  width:8px;
+  height:15px;
+  background:#00ffff;
+  box-shadow:0 0 10px #00ffff;
+  animation:blink 1s infinite;
+  vertical-align:middle;
+}
+
+@keyframes blink{
+  50%{opacity:0}
+}
+
+/* CODE */
+
+.code-window{
+  background:#010207;
+  border:1px solid rgba(0,255,255,.14);
+  padding:18px;
+  overflow:hidden;
+  position:relative;
+}
+
+.code{
+  color:#a6b8c9;
+  font-size:12px;
+  line-height:1.7;
+  white-space:pre;
+  animation:codeSlide 18s linear infinite;
+}
+
+@keyframes codeSlide{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-120px)}
+}
+
+.keyword{color:#ff61d8}
+.string{color:#8aff80}
+.function{color:#00ffff}
+.number{color:#ffd166}
+.comment{color:#465563}
+
+/* PROGRESS */
+
+.progress-box{
+  margin-top:20px;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  color:#6e8193;
+  font-size:11px;
+  margin-bottom:8px;
+}
+
+.progress{
+  height:5px;
+  background:#0b111a;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:#00ffff;
+  box-shadow:0 0 15px #00ffff;
+  animation:load 4s ease forwards;
+}
+
+@keyframes load{
+  to{width:100%}
+}
+
+/* PROJECTS */
+
+.projects{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.project{
+  border:1px solid rgba(0,255,255,.15);
+  padding:20px;
+  min-height:150px;
+  transition:.3s;
+  background:rgba(0,255,255,.015);
+}
+
+.project:hover{
+  transform:translateY(-5px);
+  border-color:rgba(0,255,255,.5);
+  box-shadow:0 0 25px rgba(0,255,255,.12);
+}
+
+.project-number{
+  color:#405465;
+  font-size:11px;
+}
+
+.project h3{
+  color:#fff;
+  margin:15px 0 8px;
+  font-family:Arial,sans-serif;
+}
+
+.project p{
+  color:#708394;
+  font-size:11px;
+  line-height:1.7;
+}
+
+/* FOOTER */
+
+.footer{
+  text-align:center;
+  margin-top:30px;
+  color:#506170;
+  font-size:10px;
+  letter-spacing:3px;
+}
+
+.footer strong{
+  color:#00ffff;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+  .container{
+    width:94%;
+    padding-top:18px;
+  }
+
+  .header{
+    padding:20px;
+  }
+
+  .logo{
+    font-size:42px;
+    letter-spacing:6px;
+  }
+
+  .subtitle{
+    font-size:9px;
+    letter-spacing:3px;
+  }
+
+  .status-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .projects{
+    grid-template-columns:1fr;
+  }
+
+  .section{
+    padding:18px;
+  }
+
+  .terminal{
+    font-size:11px;
+  }
+
+  .code{
+    font-size:9px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scanline"></div>
+
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+<div class="particle p6"></div>
+<div class="particle p7"></div>
+<div class="particle p8"></div>
+
+<main class="container">
+
+  <header class="header">
+
+    <div class="system">
+      SYSTEM // DIGITAL LAB // 01
+    </div>
+
+    <div class="logo">
+      AVIYAN
+    </div>
+
+    <div class="subtitle">
+      CODE • CREATE • DEPLOY
+    </div>
+
+    <div class="status-grid">
+
+      <div class="status">
+        <div class="status-label">SYSTEM</div>
+        <div class="status-value">
+          <span class="dot"></span>ONLINE
+        </div>
+      </div>
+
+      <div class="status">
+        <div class="status-label">CODE ENGINE</div>
+        <div class="status-value">
+          <span class="dot"></span>ACTIVE
+        </div>
+      </div>
+
+      <div class="status">
+        <div class="status-label">GITHUB</div>
+        <div class="status-value">
+          <span class="dot"></span>CONNECTED
+        </div>
+      </div>
+
+      <div class="status">
+        <div class="status-label">DEPLOYMENT</div>
+        <div class="status-value">
+          <span class="dot"></span>LIVE
+        </div>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      // TERMINAL SESSION
+    </div>
+
+    <div class="terminal" id="terminal"></div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      // SOURCE CODE STREAM
+    </div>
+
+    <div class="code-window">
+
+<pre class="code">
+<span class="comment">// AVIYAN DIGITAL LAB</span>
+
+<span class="keyword">const</span> developer = <span class="string">"AVIYAN"</span>;
+
+<span class="keyword">function</span> <span class="function">buildFuture</span>() {
+
+    <span class="keyword">const</span> ideas = [
+        <span class="string">"innovation"</span>,
+        <span class="string">"technology"</span>,
+        <span class="string">"creativity"</span>
+    ];
+
+    <span class="keyword">return</span> ideas
+        .map(project =&gt; <span class="string">"BUILD_"</span> + project)
+        .join(<span class="string">" // "</span>);
+}
+
+<span class="keyword">const</span> system = {
+    developer: developer,
+    status: <span class="string">"ONLINE"</span>,
+    github: <span class="string">"CONNECTED"</span>,
+    deployment: <span class="string">"LIVE"</span>,
+    mode: <span class="string">"BUILD"</span>
+};
+
+console.log(system);
+
+<span class="comment">// compile → test → deploy</span>
+
+<span class="keyword">async function</span> <span class="function">deployProject</span>() {
+
+    <span class="keyword">await</span> connectToGitHub();
+
+    <span class="keyword">await</span> compileSource();
+
+    <span class="keyword">await</span> runTests();
+
+    <span class="keyword">return</span> <span class="string">"DEPLOYMENT SUCCESSFUL"</span>;
+}
+</pre>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      // DEPLOYMENT PROCESS
+    </div>
+
+    <div class="progress-box">
+
+      <div class="progress-info">
+        <span>BUILD PROGRESS</span>
+        <span id="percent">0%</span>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-title">
+      // PROJECT MATRIX
+    </div>
+
+    <div class="projects">
+
+      <div class="project">
+        <div class="project-number">PROJECT_01</div>
+        <h3>WEB SYSTEMS</h3>
+        <p>
+          Interactive digital experiences engineered
+          for modern browsers.
+        </p>
+      </div>
+
+      <div class="project">
+        <div class="project-number">PROJECT_02</div>
+        <h3>UI ENGINE</h3>
+        <p>
+          Futuristic interfaces combining motion,
+          code and visual technology.
+        </p>
+      </div>
+
+      <div class="project">
+        <div class="project-number">PROJECT_03</div>
+        <h3>EXPERIMENTAL LAB</h3>
+        <p>
+          Testing new ideas, systems and
+          experimental digital concepts.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="footer">
+    <strong>AVIYAN</strong> // DIGITAL LAB
+    <br><br>
+    SYSTEM STATUS: OPERATIONAL
+  </div>
+
+</main>
+
+
+<script>
+
+/* TERMINAL ANIMATION */
+
+const terminal = document.getElementById("terminal");
+
+const lines = [
+  "> initializing developer environment...",
+  "> loading source code...",
+  "> connecting to GitHub...",
+  "> repository connection established ✓",
+  "> compiling modules...",
+  "> running system checks...",
+  "> all systems operational ✓",
+  "> preparing deployment...",
+  "> deployment successful ✓",
+  "> AVIYAN DIGITAL LAB // ONLINE"
+];
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeLine(){
+
+  if(lineIndex >= lines.length){
+    terminal.innerHTML +=
+      '<br><span class="prompt">$</span> ready <span class="cursor"></span>';
+    return;
+  }
+
+  if(charIndex < lines[lineIndex].length){
+
+    terminal.innerHTML +=
+      lines[lineIndex][charIndex];
+
+    charIndex++;
+
+    setTimeout(typeLine,25);
+
+  }else{
+
+    terminal.innerHTML += "<br>";
+
+    lineIndex++;
+    charIndex=0;
+
+    setTimeout(typeLine,350);
+  }
+}
+
+typeLine();
+
+
+/* BUILD PERCENTAGE */
+
+let percent = 0;
+
+const percentElement =
+  document.getElementById("percent");
+
+const counter = setInterval(()=>{
+
+  percent++;
+
+  percentElement.textContent =
+    percent + "%";
+
+  if(percent >= 100){
+    clearInterval(counter);
+  }
+
+},40);
+
+</script>
+
+</body>
+</html>
