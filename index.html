@@ -4,773 +4,567 @@
 <meta charset="UTF-8">
 <meta name="viewport"
       content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
-<title>AVIYAN // CORE</title>
+<title>AVIYAN // SECURITY CORE</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#00030a;
-    font-family:"Courier New",monospace;
-    color:#dffcff;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#010207;
+  color:#dffcff;
+  font-family:"Courier New",monospace;
 }
 
 body{
-    position:relative;
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 45%,
+      rgba(0,220,255,.12),
+      transparent 28%),
+    radial-gradient(circle at 15% 85%,
+      rgba(100,0,255,.14),
+      transparent 30%),
+    radial-gradient(circle at 90% 10%,
+      rgba(255,0,80,.08),
+      transparent 25%),
+    #010207;
 }
 
-/* =====================================================
-   BACKGROUND
-===================================================== */
-
-.bg{
-    position:absolute;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(0,220,255,.12),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 20% 80%,
-            rgba(80,0,255,.13),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 90% 15%,
-            rgba(0,255,220,.08),
-            transparent 25%
-        ),
-        #00030a;
-}
-
-/* GRID */
+/* DIGITAL GRID */
 
 .grid{
-    position:absolute;
-    inset:-100px;
+  position:absolute;
+  inset:-100px;
 
-    background-image:
-        linear-gradient(
-            rgba(0,220,255,.055) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(0,220,255,.055) 1px,
-            transparent 1px
-        );
+  background-image:
+    linear-gradient(
+      rgba(0,230,255,.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,230,255,.05) 1px,
+      transparent 1px
+    );
 
-    background-size:55px 55px;
+  background-size:45px 45px;
 
-    transform:
-        perspective(500px)
-        rotateX(62deg)
-        scale(1.5);
+  transform:
+    perspective(500px)
+    rotateX(62deg)
+    scale(1.6);
 
-    transform-origin:center bottom;
+  transform-origin:center bottom;
 
-    animation:gridMove 5s linear infinite;
+  animation:gridMove 4s linear infinite;
 }
 
 @keyframes gridMove{
-
-    from{
-        background-position:0 0;
-    }
-
-    to{
-        background-position:0 55px;
-    }
-
+  from{background-position:0 0}
+  to{background-position:0 45px}
 }
 
-/* =====================================================
-   SCANLINE
-===================================================== */
+/* SCANNER */
 
 .scan{
-    position:absolute;
+  position:absolute;
+  left:0;
+  width:100%;
+  height:2px;
 
-    width:100%;
-    height:3px;
+  background:#00ffff;
 
-    background:#00ffff;
+  box-shadow:
+    0 0 10px #00ffff,
+    0 0 30px #00ffff;
 
-    box-shadow:
-        0 0 10px #00ffff,
-        0 0 35px #00ffff;
+  opacity:.55;
 
-    opacity:.5;
+  animation:scan 3s linear infinite;
 
-    animation:scan 3s linear infinite;
-
-    z-index:20;
+  z-index:20;
 }
 
 @keyframes scan{
-
-    0%{
-        top:-5%;
-    }
-
-    100%{
-        top:105%;
-    }
-
+  from{top:-5%}
+  to{top:105%}
 }
 
-/* =====================================================
-   PARTICLES
-===================================================== */
+/* PARTICLES */
 
 #particles{
-    position:absolute;
-    inset:0;
-    z-index:2;
+  position:absolute;
+  inset:0;
+  z-index:2;
 }
 
-/* =====================================================
-   MAIN
-===================================================== */
+/* MAIN */
 
 .interface{
-    position:absolute;
-
-    inset:0;
-
-    z-index:5;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    padding:
-        25px
-        25px
-        30px;
-
+  position:absolute;
+  inset:0;
+  z-index:5;
 }
 
-/* =====================================================
-   TOP BAR
-===================================================== */
+/* TOP */
 
-.top{
+.topbar{
+  position:absolute;
+  top:18px;
+  left:18px;
+  right:18px;
 
-    width:100%;
+  display:flex;
+  justify-content:space-between;
 
-    display:flex;
+  font-size:9px;
+  letter-spacing:2px;
 
-    justify-content:space-between;
-
-    align-items:center;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    color:#5a8296;
-
+  color:#56798b;
 }
 
-.top .online{
-
-    color:#00ffae;
-
-    text-shadow:
-        0 0 10px #00ffae;
-
+.online{
+  color:#00ff9d;
+  text-shadow:0 0 10px #00ff9d;
 }
 
-/* =====================================================
-   TITLE
-===================================================== */
+/* NAME */
 
-.brand{
-
-    margin-top:65px;
-
-    text-align:center;
-
-    z-index:8;
-
+.name{
+  position:absolute;
+  top:65px;
+  width:100%;
+  text-align:center;
 }
 
-.brand small{
-
-    color:#00d9ff;
-
-    letter-spacing:6px;
-
-    font-size:10px;
-
+.name small{
+  font-size:8px;
+  letter-spacing:5px;
+  color:#48cce8;
 }
 
-.brand h1{
+.name h1{
+  margin-top:8px;
 
-    margin-top:8px;
+  font-family:Arial,sans-serif;
 
-    font-family:Arial,sans-serif;
+  font-size:
+    clamp(48px,15vw,100px);
 
-    font-size:
-        clamp(48px,15vw,100px);
+  letter-spacing:
+    clamp(7px,3vw,18px);
 
-    letter-spacing:
-        clamp(8px,3vw,20px);
+  color:#fff;
 
-    font-weight:900;
-
-    color:white;
-
-    text-shadow:
-
-        0 0 8px #fff,
-
-        0 0 20px #00eaff,
-
-        0 0 50px #008cff,
-
-        0 0 90px #6a00ff;
-
-    animation:
-        flicker 4s infinite;
-
+  text-shadow:
+    0 0 8px #fff,
+    0 0 25px #00eaff,
+    0 0 60px #0077ff,
+    0 0 100px #7000ff;
 }
 
-@keyframes flicker{
-
-    0%,95%,100%{
-        opacity:1;
-    }
-
-    96%{
-        opacity:.45;
-    }
-
-    97%{
-        opacity:1;
-    }
-
-}
-
-/* =====================================================
-   DIGITAL CORE
-===================================================== */
+/* CENTER CORE */
 
 .core{
+  position:absolute;
 
-    position:absolute;
+  left:50%;
+  top:41%;
 
-    top:39%;
+  width:245px;
+  height:245px;
 
-    left:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    width:270px;
-
-    height:270px;
-
+  transform:translate(-50%,-50%);
 }
 
+/* RINGS */
+
 .ring{
+  position:absolute;
+  inset:0;
 
-    position:absolute;
+  border-radius:50%;
 
-    inset:0;
+  border:
+    1px solid
+    rgba(0,240,255,.5);
 
-    border-radius:50%;
-
-    border:
-        1px solid rgba(0,230,255,.55);
-
-    box-shadow:
-        0 0 30px rgba(0,220,255,.15);
-
+  box-shadow:
+    0 0 25px
+    rgba(0,230,255,.12);
 }
 
 .ring:nth-child(1){
-
-    animation:
-        rotate 7s linear infinite;
-
+  animation:rotate 6s linear infinite;
 }
 
 .ring:nth-child(2){
+  inset:20px;
 
-    inset:18px;
+  border-color:
+    rgba(120,50,255,.6);
 
-    border-color:
-        rgba(120,60,255,.65);
-
-    animation:
-        rotateReverse 5s linear infinite;
-
+  animation:
+    rotateReverse 4s linear infinite;
 }
 
 .ring:nth-child(3){
+  inset:43px;
 
-    inset:38px;
+  border:
+    2px dashed
+    rgba(0,255,210,.5);
 
-    border:
-        2px dashed
-        rgba(0,255,220,.45);
-
-    animation:
-        rotate 3s linear infinite;
-
-}
-
-.ring::before,
-.ring::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:8px;
-
-    height:8px;
-
-    border-radius:50%;
-
-    background:#00ffff;
-
-    box-shadow:
-        0 0 15px #00ffff,
-        0 0 35px #00ffff;
-
-}
-
-.ring::before{
-
-    top:-4px;
-
-    left:50%;
-
-}
-
-.ring::after{
-
-    bottom:-4px;
-
-    right:50%;
-
+  animation:
+    rotate 2.8s linear infinite;
 }
 
 @keyframes rotate{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 @keyframes rotateReverse{
-
-    from{
-        transform:rotate(360deg);
-    }
-
-    to{
-        transform:rotate(0deg);
-    }
-
+  to{
+    transform:rotate(-360deg);
+  }
 }
 
+/* CORE */
+
 .core-center{
+  position:absolute;
 
-    position:absolute;
+  left:50%;
+  top:50%;
 
-    top:50%;
-    left:50%;
+  width:70px;
+  height:70px;
 
-    transform:
-        translate(-50%,-50%);
+  transform:
+    translate(-50%,-50%);
 
-    width:90px;
-    height:90px;
+  border-radius:50%;
 
-    border-radius:50%;
+  background:
+    radial-gradient(
+      circle,
+      white 0%,
+      #00ffff 18%,
+      #0066ff 45%,
+      #07001b 75%
+    );
 
-    background:
-        radial-gradient(
-            circle,
-            #ffffff,
-            #00ffff 15%,
-            #0077ff 45%,
-            #08001c 75%
-        );
+  box-shadow:
+    0 0 20px #00ffff,
+    0 0 60px #008cff,
+    0 0 110px #6200ff;
 
-    box-shadow:
-
-        0 0 20px #00ffff,
-
-        0 0 60px #008cff,
-
-        0 0 110px #5d00ff;
-
-    animation:
-        pulse 1.5s infinite;
-
+  animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
-
-    0%,100%{
-        transform:
-            translate(-50%,-50%)
-            scale(1);
-    }
-
-    50%{
-        transform:
-            translate(-50%,-50%)
-            scale(1.12);
-    }
-
+  50%{
+    transform:
+      translate(-50%,-50%)
+      scale(1.15);
+  }
 }
 
-/* =====================================================
-   CODE STREAM
-===================================================== */
+/* RADAR */
 
-.code-stream{
+.radar{
+  position:absolute;
 
-    position:absolute;
+  left:50%;
+  top:41%;
 
-    top:28%;
+  width:285px;
+  height:285px;
 
-    left:0;
+  transform:translate(-50%,-50%);
 
-    width:100%;
+  border-radius:50%;
 
-    height:45%;
+  border:
+    1px solid
+    rgba(0,255,200,.15);
 
-    overflow:hidden;
-
-    opacity:.5;
-
-    z-index:-1;
-
+  overflow:hidden;
 }
 
-.code-column{
+.radar::before{
+  content:"";
 
-    position:absolute;
+  position:absolute;
 
-    top:-100%;
+  left:50%;
+  top:50%;
 
-    white-space:pre;
+  width:50%;
+  height:2px;
 
-    font-size:10px;
+  transform-origin:left center;
 
-    line-height:18px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,255,180,.8),
+      transparent
+    );
 
-    color:#00eaff;
-
-    text-shadow:
-        0 0 8px #00eaff;
-
-    animation:
-        fall linear infinite;
-
+  animation:
+    radarSpin 2.5s linear infinite;
 }
 
-@keyframes fall{
-
-    to{
-        transform:
-            translateY(250vh);
-    }
-
+@keyframes radarSpin{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
-/* =====================================================
-   TERMINAL
-===================================================== */
+/* CODE STREAM */
+
+.code{
+  position:absolute;
+
+  inset:0;
+
+  overflow:hidden;
+
+  opacity:.32;
+
+  z-index:-1;
+}
+
+.column{
+  position:absolute;
+
+  top:-100%;
+
+  color:#00eaff;
+
+  font-size:9px;
+
+  line-height:18px;
+
+  text-shadow:
+    0 0 8px #00eaff;
+
+  white-space:pre;
+
+  animation:
+    codeFall linear infinite;
+}
+
+@keyframes codeFall{
+  to{
+    transform:
+      translateY(220vh);
+  }
+}
+
+/* TERMINAL */
 
 .terminal{
+  position:absolute;
 
-    position:absolute;
+  left:18px;
+  right:18px;
+  bottom:92px;
 
-    left:25px;
+  height:190px;
 
-    right:25px;
+  padding:16px;
 
-    bottom:125px;
+  background:
+    rgba(0,5,15,.82);
 
-    height:205px;
+  border:
+    1px solid
+    rgba(0,230,255,.28);
 
-    border:
-        1px solid
-        rgba(0,230,255,.25);
+  box-shadow:
+    0 0 35px
+    rgba(0,220,255,.08);
 
-    background:
-        rgba(0,5,14,.72);
+  backdrop-filter:blur(8px);
 
-    backdrop-filter:
-        blur(8px);
-
-    box-shadow:
-        0 0 35px
-        rgba(0,200,255,.08);
-
-    padding:18px;
-
-    overflow:hidden;
-
+  overflow:hidden;
 }
 
-.terminal-head{
-
-    color:#55798c;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    margin-bottom:12px;
-
+.terminal-title{
+  font-size:8px;
+  color:#557888;
+  letter-spacing:2px;
+  margin-bottom:10px;
 }
 
 #terminalText{
+  color:#86ffe7;
 
-    color:#8fffe8;
+  font-size:10px;
 
-    font-size:11px;
+  line-height:1.65;
 
-    line-height:1.7;
-
-    white-space:pre-wrap;
-
+  white-space:pre-wrap;
 }
 
-.cursor{
-
-    display:inline-block;
-
-    width:7px;
-
-    height:12px;
-
-    background:#00ffff;
-
-    box-shadow:
-        0 0 10px #00ffff;
-
-    animation:
-        blink .8s infinite;
-
-}
-
-@keyframes blink{
-
-    50%{
-        opacity:0;
-    }
-
-}
-
-/* =====================================================
-   STATUS
-===================================================== */
+/* STATUS */
 
 .status{
+  position:absolute;
 
-    position:absolute;
+  left:18px;
+  right:18px;
+  bottom:52px;
 
-    left:25px;
-    right:25px;
+  display:flex;
+  justify-content:space-between;
 
-    bottom:70px;
+  color:#527284;
 
-    display:flex;
+  font-size:7px;
 
-    justify-content:
-        space-between;
-
-    font-size:8px;
-
-    letter-spacing:1px;
-
-    color:#557486;
-
+  letter-spacing:1px;
 }
 
-.status span{
-
-    color:#00ffae;
-
+.status b{
+  color:#00ff9d;
 }
 
-/* =====================================================
-   FINAL
-===================================================== */
+/* PHASE */
+
+.phase{
+  position:absolute;
+
+  top:51%;
+
+  width:100%;
+
+  text-align:center;
+
+  color:#00eaff;
+
+  font-size:9px;
+
+  letter-spacing:3px;
+
+  text-shadow:
+    0 0 12px #00eaff;
+
+  transition:.3s;
+}
+
+/* FINAL */
 
 .final{
+  position:absolute;
 
-    position:absolute;
+  inset:0;
 
-    inset:0;
+  z-index:100;
 
-    display:flex;
+  display:flex;
 
-    align-items:center;
+  align-items:center;
+  justify-content:center;
 
-    justify-content:center;
+  flex-direction:column;
 
-    flex-direction:column;
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,220,255,.14),
+      rgba(0,0,0,.98) 60%
+    );
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,240,255,.12),
-            rgba(0,0,0,.97) 55%
-        );
+  opacity:0;
 
-    opacity:0;
+  transition:
+    opacity 1.2s ease;
 
-    pointer-events:none;
-
-    z-index:50;
-
-    transition:
-        opacity 1s ease;
-
+  pointer-events:none;
 }
 
 .final.show{
-
-    opacity:1;
-
+  opacity:1;
 }
 
 .final h2{
+  font-family:Arial,sans-serif;
 
-    font-family:Arial,sans-serif;
+  font-size:
+    clamp(58px,17vw,120px);
 
-    font-size:
-        clamp(58px,17vw,120px);
+  letter-spacing:
+    clamp(8px,4vw,22px);
 
-    letter-spacing:
-        clamp(8px,4vw,25px);
+  color:#fff;
 
-    color:white;
-
-    text-shadow:
-
-        0 0 10px #fff,
-
-        0 0 30px #00ffff,
-
-        0 0 70px #008cff,
-
-        0 0 120px #7000ff;
-
+  text-shadow:
+    0 0 10px #fff,
+    0 0 30px #00ffff,
+    0 0 70px #0077ff,
+    0 0 120px #7000ff;
 }
 
 .final p{
+  margin-top:18px;
 
-    margin-top:18px;
+  font-size:9px;
 
-    font-size:11px;
+  letter-spacing:4px;
 
-    letter-spacing:5px;
-
-    color:#7eeeff;
-
+  color:#7feeff;
 }
 
-/* =====================================================
-   GLITCH
-===================================================== */
+.final .line{
+  margin-top:25px;
+
+  width:180px;
+  height:1px;
+
+  background:#00ffff;
+
+  box-shadow:
+    0 0 15px #00ffff;
+}
+
+/* GLITCH */
 
 .glitch{
-
-    animation:
-        glitch .25s steps(2);
-
+  animation:glitch .35s steps(2);
 }
 
 @keyframes glitch{
-
-    0%{
-        transform:translate(0);
-    }
-
-    25%{
-        transform:translate(-8px,3px);
-    }
-
-    50%{
-        transform:translate(8px,-3px);
-    }
-
-    75%{
-        transform:translate(-4px,-2px);
-    }
-
-    100%{
-        transform:translate(0);
-    }
-
-}
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:600px){
-
-    .interface{
-        padding:18px;
-    }
-
-    .brand{
-        margin-top:50px;
-    }
-
-    .core{
-        top:38%;
-        width:245px;
-        height:245px;
-    }
-
-    .terminal{
-        left:18px;
-        right:18px;
-        bottom:105px;
-        height:185px;
-    }
-
-    .status{
-        left:18px;
-        right:18px;
-        bottom:48px;
-    }
-
+  0%{
+    transform:translate(0);
+  }
+  25%{
+    transform:translate(-7px,2px);
+  }
+  50%{
+    transform:translate(8px,-2px);
+  }
+  75%{
+    transform:translate(-3px,3px);
+  }
+  100%{
+    transform:translate(0);
+  }
 }
 
 </style>
@@ -778,101 +572,113 @@ body{
 
 <body>
 
-<div class="bg"></div>
-
 <div class="grid"></div>
 
 <div class="scan"></div>
 
 <canvas id="particles"></canvas>
 
-<div class="code-stream" id="codeStream"></div>
+<div class="code" id="code"></div>
 
 
 <div class="interface">
 
-    <div class="top">
+  <div class="topbar">
 
-        <div>
-            AV // CORE-01
-        </div>
+    <span>
+      SECURITY CORE // AV-01
+    </span>
 
-        <div class="online">
-            ● SYSTEM ONLINE
-        </div>
+    <span class="online">
+      ● SECURE
+    </span>
 
+  </div>
+
+
+  <div class="name">
+
+    <small>
+      CYBER SECURITY DEVELOPMENT LAB
+    </small>
+
+    <h1>
+      AVIYAN
+    </h1>
+
+  </div>
+
+
+  <div class="radar"></div>
+
+
+  <div class="core">
+
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+
+    <div class="core-center"></div>
+
+  </div>
+
+
+  <div
+    class="phase"
+    id="phase">
+    INITIALIZING SECURITY CORE
+  </div>
+
+
+  <div class="terminal">
+
+    <div class="terminal-title">
+      SECURE TERMINAL // LIVE OPERATIONS
     </div>
 
+    <div id="terminalText"></div>
 
-    <div class="brand">
-
-        <small>
-            DIGITAL DEVELOPMENT ENVIRONMENT
-        </small>
-
-        <h1>
-            AVIYAN
-        </h1>
-
-    </div>
+  </div>
 
 
-    <div class="core">
+  <div class="status">
 
-        <div class="ring"></div>
+    <span>
+      NETWORK <b>SECURE</b>
+    </span>
 
-        <div class="ring"></div>
+    <span>
+      ENCRYPTION <b>ACTIVE</b>
+    </span>
 
-        <div class="ring"></div>
+    <span>
+      FIREWALL <b>ACTIVE</b>
+    </span>
 
-        <div class="core-center"></div>
+    <span>
+      CORE <b>ONLINE</b>
+    </span>
 
-    </div>
-
-
-    <div class="terminal">
-
-        <div class="terminal-head">
-            TERMINAL // LIVE DEVELOPMENT SESSION
-        </div>
-
-        <div id="terminalText"></div>
-
-        <span class="cursor"></span>
-
-    </div>
-
-
-    <div class="status">
-
-        <div>
-            CPU <span>ONLINE</span>
-        </div>
-
-        <div>
-            NETWORK <span>LINKED</span>
-        </div>
-
-        <div>
-            CODE <span>ACTIVE</span>
-        </div>
-
-        <div>
-            BUILD <span>100%</span>
-        </div>
-
-    </div>
+  </div>
 
 </div>
 
 
-<div class="final" id="final">
+<div
+  class="final"
+  id="final">
 
-    <h2>AVIYAN</h2>
+  <h2>AVIYAN</h2>
 
-    <p>
-        DEVELOPER // SYSTEM ONLINE
-    </p>
+  <p>
+    SECURITY CORE // ONLINE
+  </p>
+
+  <div class="line"></div>
+
+  <p>
+    CODE • SECURITY • ENGINEERING
+  </p>
 
 </div>
 
@@ -883,320 +689,442 @@ body{
    CODE RAIN
 ===================================================== */
 
-const codeStream =
-    document.getElementById("codeStream");
+const codeBox =
+  document.getElementById("code");
 
-const snippets = [
+const snippets=[
 
-`const developer = "AVIYAN";
-async function buildFuture(){
-await compile();
-return deploy();
+`const securityCore = new SecurityEngine();
+
+securityCore.initialize();
+securityCore.encrypt();
+securityCore.validate();
+
+if(system.integrity === true){
+    securityCore.authorize();
 }`,
 
-`git status
-git add .
-git commit -m "build core"
-git push origin main`,
+`$ security_scan
+> initializing...
+> analyzing network...
+> verifying packets...
+> integrity verified
+> scan complete`,
 
-`function create(){
-const idea = new System();
-idea.compile();
-idea.deploy();
+`function protectSystem(){
+
+  firewall.activate();
+
+  encryption.enable();
+
+  network.lock();
+
+  return "SECURE";
 }`,
 
 `01001001 01010110
 01001001 01011001
 01000001 01001110`,
 
-`<system>
-<core>ONLINE</core>
-<code>ACTIVE</code>
-<network>LINKED</network>
-</system>`,
+`const firewall = {
+  status: "ACTIVE",
+  integrity: 100,
+  encryption: true,
+  network: "SECURE"
+};`,
 
-`const system = {
-status:"ONLINE",
-mode:"DEVELOPMENT",
-engine:"ACTIVE"
-};`
+`$ system_check
 
+CPU .............. OK
+MEMORY ........... OK
+NETWORK .......... OK
+ENCRYPTION ....... OK
+FIREWALL ......... OK`,
+
+`AUTHORIZATION
+
+VERIFYING IDENTITY...
+VERIFYING CORE...
+VERIFYING INTEGRITY...
+
+ACCESS GRANTED`
 ];
 
-for(let i=0;i<12;i++){
+for(let i=0;i<15;i++){
 
-    const col =
-        document.createElement("div");
+  const c =
+    document.createElement("div");
 
-    col.className="code-column";
+  c.className="column";
 
-    col.style.left =
-        (Math.random()*100)+"%";
+  c.style.left =
+    Math.random()*100+"%";
 
-    col.style.animationDuration =
-        (7+Math.random()*10)+"s";
+  c.style.animationDuration =
+    7+Math.random()*10+"s";
 
-    col.style.animationDelay =
-        (-Math.random()*10)+"s";
+  c.style.animationDelay =
+    -Math.random()*12+"s";
 
-    col.textContent =
-        snippets[
-            Math.floor(
-                Math.random()*snippets.length
-            )
-        ];
+  c.textContent =
+    snippets[
+      Math.floor(
+        Math.random()*snippets.length
+      )
+    ];
 
-    codeStream.appendChild(col);
+  codeBox.appendChild(c);
 
 }
 
 
 /* =====================================================
-   PARTICLE ENGINE
+   PARTICLES
 ===================================================== */
 
 const canvas =
-    document.getElementById("particles");
+  document.getElementById("particles");
 
 const ctx =
-    canvas.getContext("2d");
+  canvas.getContext("2d");
 
 function resize(){
 
-    canvas.width =
-        window.innerWidth;
+  canvas.width =
+    innerWidth;
 
-    canvas.height =
-        window.innerHeight;
+  canvas.height =
+    innerHeight;
 
 }
 
 resize();
 
 window.addEventListener(
-    "resize",
-    resize
+  "resize",
+  resize
 );
 
 const dots=[];
 
-for(let i=0;i<100;i++){
+for(let i=0;i<90;i++){
 
-    dots.push({
+  dots.push({
 
-        x:Math.random()*innerWidth,
+    x:Math.random()*innerWidth,
 
-        y:Math.random()*innerHeight,
+    y:Math.random()*innerHeight,
 
-        vx:(Math.random()-.5)*.35,
+    vx:(Math.random()-.5)*.4,
 
-        vy:(Math.random()-.5)*.35,
+    vy:(Math.random()-.5)*.4,
 
-        r:Math.random()*1.7+.4
+    r:Math.random()*1.5+.4
 
-    });
+  });
 
 }
 
-function particleLoop(){
+function particles(){
 
-    ctx.clearRect(
-        0,0,
-        canvas.width,
-        canvas.height
+  ctx.clearRect(
+    0,0,
+    canvas.width,
+    canvas.height
+  );
+
+  dots.forEach((p,i)=>{
+
+    p.x+=p.vx;
+    p.y+=p.vy;
+
+    if(p.x<0)p.x=innerWidth;
+    if(p.x>innerWidth)p.x=0;
+
+    if(p.y<0)p.y=innerHeight;
+    if(p.y>innerHeight)p.y=0;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      p.r,
+      0,
+      Math.PI*2
     );
 
-    dots.forEach((p,i)=>{
+    ctx.fillStyle=
+      "rgba(0,240,255,.75)";
 
-        p.x+=p.vx;
-        p.y+=p.vy;
+    ctx.fill();
 
-        if(p.x<0)p.x=innerWidth;
-        if(p.x>innerWidth)p.x=0;
+    for(
+      let j=i+1;
+      j<dots.length;
+      j++
+    ){
 
-        if(p.y<0)p.y=innerHeight;
-        if(p.y>innerHeight)p.y=0;
+      const q=dots[j];
+
+      const dx=p.x-q.x;
+      const dy=p.y-q.y;
+
+      const dist=
+        Math.sqrt(
+          dx*dx+dy*dy
+        );
+
+      if(dist<100){
 
         ctx.beginPath();
 
-        ctx.arc(
-            p.x,
-            p.y,
-            p.r,
-            0,
-            Math.PI*2
+        ctx.moveTo(
+          p.x,p.y
         );
 
-        ctx.fillStyle =
-            "rgba(0,230,255,.75)";
+        ctx.lineTo(
+          q.x,q.y
+        );
 
-        ctx.fill();
+        ctx.strokeStyle=
+          `rgba(
+            0,
+            180,
+            255,
+            ${(1-dist/100)*.12}
+          )`;
 
-        for(let j=i+1;j<dots.length;j++){
+        ctx.stroke();
 
-            const q=dots[j];
+      }
 
-            const dx=p.x-q.x;
-            const dy=p.y-q.y;
+    }
 
-            const dist =
-                Math.sqrt(dx*dx+dy*dy);
+  });
 
-            if(dist<110){
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    p.x,p.y
-                );
-
-                ctx.lineTo(
-                    q.x,q.y
-                );
-
-                ctx.strokeStyle =
-                    `rgba(0,180,255,${(
-                        1-dist/110
-                    )*.12})`;
-
-                ctx.stroke();
-
-            }
-
-        }
-
-    });
-
-    requestAnimationFrame(
-        particleLoop
-    );
+  requestAnimationFrame(
+    particles
+  );
 
 }
 
-particleLoop();
+particles();
 
 
 /* =====================================================
-   TERMINAL TYPING
+   TERMINAL
 ===================================================== */
 
-const terminal =
-    document.getElementById(
-        "terminalText"
-    );
+const terminal=
+  document.getElementById(
+    "terminalText"
+  );
+
+const phase=
+  document.getElementById(
+    "phase"
+  );
 
 const commands=[
 
-"> initializing core...",
-"> loading developer environment...",
-"> detecting source code...",
-"> source code detected ✓",
-"> connecting to development engine...",
-"> connection established ✓",
-"> compiling modules...",
-"> running system diagnostics...",
-"> all systems operational ✓",
-"> preparing deployment...",
-"> build completed ✓",
-"> AVIYAN // CORE ONLINE"
+"> SECURITY CORE INITIALIZING...",
+
+"> loading cryptographic engine...",
+
+"> firewall module activated ✓",
+
+"> network topology discovered ✓",
+
+"> encrypted channel established ✓",
+
+"> scanning system integrity...",
+
+"> analyzing security packets...",
+
+"> checking authorization layer...",
+
+"> threat analysis complete ✓",
+
+"> threats detected: 00",
+
+"> encryption integrity: 100%",
+
+"> firewall status: ACTIVE",
+
+"> network status: SECURE",
+
+"> security verification complete ✓",
+
+"> deploying security configuration...",
+
+"> operation complete ✓",
+
+"> AVIYAN SECURITY CORE ONLINE"
 
 ];
 
-let commandIndex=0;
+let index=0;
+let char=0;
 
-let characterIndex=0;
+function typeCommand(){
 
-function typeTerminal(){
+  if(index>=commands.length){
 
-    if(commandIndex>=commands.length){
+    setTimeout(()=>{
 
-        setTimeout(()=>{
+      terminal.innerHTML="";
+      index=0;
+      char=0;
 
-            terminal.innerHTML="";
+      typeCommand();
 
-            commandIndex=0;
+    },1200);
 
-            characterIndex=0;
+    return;
 
-            typeTerminal();
+  }
 
-        },2500);
+  const text=
+    commands[index];
 
-        return;
+  if(char<text.length){
 
-    }
+    terminal.innerHTML+=
+      text[char];
 
-    const current =
-        commands[commandIndex];
+    char++;
 
-    if(characterIndex<
-       current.length){
+    setTimeout(
+      typeCommand,
+      16
+    );
 
-        terminal.innerHTML +=
-            current[characterIndex];
+  }else{
 
-        characterIndex++;
+    terminal.innerHTML+="<br>";
 
-        setTimeout(
-            typeTerminal,
-            18
-        );
+    index++;
+    char=0;
 
-    }else{
+    setTimeout(
+      typeCommand,
+      180
+    );
 
-        terminal.innerHTML +=
-            "<br>";
-
-        commandIndex++;
-
-        characterIndex=0;
-
-        setTimeout(
-            typeTerminal,
-            250
-        );
-
-    }
+  }
 
 }
 
-typeTerminal();
+typeCommand();
 
 
 /* =====================================================
-   CINEMATIC FINAL REVEAL
+   45 SECOND CINEMATIC TIMELINE
 ===================================================== */
 
-setTimeout(()=>{
+const timeline=[
+
+  {
+    time:0,
+    text:"SECURITY CORE INITIALIZING"
+  },
+
+  {
+    time:7,
+    text:"NETWORK TOPOLOGY DISCOVERY"
+  },
+
+  {
+    time:14,
+    text:"SOURCE CODE SECURITY ANALYSIS"
+  },
+
+  {
+    time:21,
+    text:"THREAT DETECTION // SCANNING"
+  },
+
+  {
+    time:28,
+    text:"ENCRYPTION ENGINE ACTIVE"
+  },
+
+  {
+    time:35,
+    text:"FIREWALL INTEGRITY VERIFIED"
+  },
+
+  {
+    time:41,
+    text:"SECURITY CORE AUTHORIZED"
+  }
+
+];
+
+let start=
+  performance.now();
+
+function cinematic(){
+
+  const elapsed=
+    (performance.now()-start)/1000;
+
+  let current=
+    timeline[0];
+
+  timeline.forEach(item=>{
+
+    if(elapsed>=item.time){
+      current=item;
+    }
+
+  });
+
+  phase.textContent=
+    current.text;
+
+  if(
+    elapsed>41 &&
+    elapsed<45
+  ){
+
+    document
+      .getElementById("final")
+      .classList.add("show");
+
+  }
+
+  if(elapsed>44.5){
+
+    document
+      .getElementById("final")
+      .classList.remove("show");
 
     document.body.classList.add(
-        "glitch"
+      "glitch"
     );
 
-},11000);
+    setTimeout(()=>{
 
-setTimeout(()=>{
-
-    document
-        .getElementById("final")
-        .classList.add("show");
-
-},12000);
-
-
-/* RESTART CINEMATIC */
-
-setTimeout(()=>{
-
-    document
-        .getElementById("final")
-        .classList.remove("show");
-
-    document.body.classList.remove(
+      document.body.classList.remove(
         "glitch"
-    );
+      );
 
-},17000);
+    },350);
+
+    start=
+      performance.now();
+
+  }
+
+  requestAnimationFrame(
+    cinematic
+  );
+
+}
+
+cinematic();
 
 </script>
 
